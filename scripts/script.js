@@ -1,22 +1,26 @@
-// document = object
-// .ready() = method of jquery
-// .ready(...) = argument/parameterpassed to that method
-// function(){} in the method is an IIFE = immediate invoked f/n expression
-$(document).ready(function(){
+$(function() {
+    console.log("document is ready!");
 
-  console.log("doc is ready"); 
+    $("#doge-meme-pic").draggable({
+        containment: "#containment-wrapper",
+        scroll: false,
+        stop: function() {
+            calculateWow();
+        }
+    });
 
-  $("#dogeDiv").draggable(
-    { containment: "#dogeHouse", scroll: false }
-  
-  );
-  
-  // $("#dogePic").draggable();
+    function calculateWow() {
+        var x = $("#doge-meme-pic").position();
+        var wow = x.top + x.left;
 
-  let userGreeting = "Hello there, "
-  
-  $("button").click(function(){
-    userGreeting += $("#fname").val();
-    $("#Greetingoutput").text(userGreeting + "!");
-  });
+        if (wow < 500) {
+
+            console.log('weak wow (' + wow + ')');
+            $('#wow-output').html('<h3>weak wow (' + wow + ')</h3>')
+
+        } else {
+            console.log('BIG WOW (' + wow + ')!!!!');
+            $('#wow-output').text('BIG WOW (' + wow + ')!!')
+        }
+    }
 });
